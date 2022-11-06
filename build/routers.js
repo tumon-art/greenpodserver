@@ -44,6 +44,7 @@ var parse = require("rss-to-json").parse;
 var router = express_1.default.Router();
 // CACHED
 var thefirsts;
+var onepath;
 router.get("/thefirsts", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var rss, err_1;
     return __generator(this, function (_a) {
@@ -73,6 +74,35 @@ router.get("/thefirsts", function (req, res) { return __awaiter(void 0, void 0, 
             case 3: return [3 /*break*/, 5];
             case 4:
                 err_1 = _a.sent();
+                res.status(400).json({ data: "error" });
+                res.end();
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
+        }
+    });
+}); });
+router.get("/onepath", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var rss, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 4, , 5]);
+                if (!onepath) return [3 /*break*/, 1];
+                // SENT FORM CACHE
+                console.log(["SENT FROM CACHE"]);
+                res.status(200).send({ data: thefirsts });
+                return [3 /*break*/, 3];
+            case 1: return [4 /*yield*/, parse("https://feeds.buzzsprout.com/2042303.rss")];
+            case 2:
+                rss = _a.sent();
+                // FILL CACHE
+                onepath = rss;
+                if (rss)
+                    res.status(200).json({ data: rss });
+                _a.label = 3;
+            case 3: return [3 /*break*/, 5];
+            case 4:
+                err_2 = _a.sent();
                 res.status(400).json({ data: "error" });
                 res.end();
                 return [3 /*break*/, 5];
