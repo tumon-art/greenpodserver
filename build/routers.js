@@ -53,8 +53,8 @@ router.get("/thefirsts", function (req, res) { return __awaiter(void 0, void 0, 
                 _a.trys.push([0, 4, , 5]);
                 if (!thefirsts) return [3 /*break*/, 1];
                 // SENT FORM CACHE
-                console.log(["SENT FROM CACHE"]);
-                res.status(200).send({ data: thefirsts });
+                console.log(["/THEFIRSTS - SENT FROM CACHE"]);
+                res.status(200).json({ data: thefirsts });
                 return [3 /*break*/, 3];
             case 1: return [4 /*yield*/, parse("https://feeds.buzzsprout.com/1194665.rss")];
             case 2:
@@ -89,8 +89,8 @@ router.get("/onepath", function (req, res) { return __awaiter(void 0, void 0, vo
                 _a.trys.push([0, 4, , 5]);
                 if (!onepath) return [3 /*break*/, 1];
                 // SENT FORM CACHE
-                console.log(["SENT FROM CACHE"]);
-                res.status(200).send({ data: thefirsts });
+                console.log(["/ONEPATH - SENT FROM CACHE"]);
+                res.status(200).json({ data: onepath });
                 return [3 /*break*/, 3];
             case 1: return [4 /*yield*/, parse("https://feeds.buzzsprout.com/2042303.rss")];
             case 2:

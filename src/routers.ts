@@ -33,8 +33,8 @@ router.get("/thefirsts", async (req: Request, res: Response) => {
   try {
     if (thefirsts) {
       // SENT FORM CACHE
-      console.log([`SENT FROM CACHE`]);
-      res.status(200).send({ data: thefirsts });
+      console.log([`/THEFIRSTS - SENT FROM CACHE`]);
+      res.status(200).json({ data: thefirsts });
     } else {
       var rss: RssTypes = await parse(
         "https://feeds.buzzsprout.com/1194665.rss"
@@ -61,8 +61,8 @@ router.get("/onepath", async (req: Request, res: Response) => {
   try {
     if (onepath) {
       // SENT FORM CACHE
-      console.log([`SENT FROM CACHE`]);
-      res.status(200).send({ data: thefirsts });
+      console.log([`/ONEPATH - SENT FROM CACHE`]);
+      res.status(200).json({ data: onepath });
     } else {
       var rss: RssTypes = await parse(
         "https://feeds.buzzsprout.com/2042303.rss"
