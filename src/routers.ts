@@ -25,9 +25,31 @@ export interface RssTypes {
   items: ItemsProps[];
 }
 
+export interface ThefirstsHead {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+}
+
 // CACHED
 let thefirsts: RssTypes;
 let onepath: RssTypes;
+
+// HEAD
+let thefirstsHead: ThefirstsHead;
+
+router.get("thefirstshead", async (req: Request, res: Response) => {
+  try {
+    if (thefirsts) {
+      // SENT FORM CACHE
+      console.log([`/THEFIRSTS - SENT FROM CACHE`]);
+      res.status(200).json({ data: thefirsts });
+    }
+  } catch (error) {
+
+  }
+})
 
 router.get("/thefirsts", async (req: Request, res: Response) => {
   try {
