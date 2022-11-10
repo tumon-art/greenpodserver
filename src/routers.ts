@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import express from "express";
-import { RssTypes, ThefirstsHead } from "./types/routerTypes";
+import { RssTypes, RssHead } from "./types/routerTypes";
 const { parse } = require("rss-to-json");
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 let theFirstsRss: RssTypes;
 let onePathRss: RssTypes;
 // HEAD
-let thefirstsHead: ThefirstsHead;
+let thefirstsHead: RssHead;
 
 async function fetchTheFirsts() {
   const res: RssTypes = await parse(
@@ -17,7 +17,6 @@ async function fetchTheFirsts() {
   theFirstsRss = res
   thefirstsHead = { ...res }
   thefirstsHead.items = []
-
 } fetchTheFirsts()
 
 async function fetchOnePath() {
