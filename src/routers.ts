@@ -51,26 +51,21 @@ let onepath: RssTypes;
 let thefirstsHead: ThefirstsHead;
 
 router.get("/thefirstshead", async (req: Request, res: Response) => {
-  console.log(thefirsts);
   try {
-    if (thefirsts) {
-      thefirstsHead = thefirsts
+    if (theFirstsRss) {
+      thefirstsHead = theFirstsRss
       thefirstsHead.items = []
 
       // SENT FORM CACHED
       console.log([`/THEFIRSTSHEAD - SENT FROM CACHE`]);
       res.status(200).json({ data: thefirstsHead });
     } else {
-      var rss: RssTypes = await parse(
-        "https://feeds.buzzsprout.com/1194665.rss"
-      );
-      // FILL CACHE
-      thefirsts = rss;
+      fetchTheFirsts()
 
       // FILL THEFIRSTSHEAD
-      thefirstsHead = thefirsts
+      thefirstsHead = theFirstsRss
       thefirstsHead.items = []
-      if (rss) res.status(200).json({ data: thefirstsHead });
+      if (theFirstsRss) res.status(200).json({ data: thefirstsHead });
     }
   } catch (error) {
   }
