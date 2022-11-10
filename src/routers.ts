@@ -61,41 +61,29 @@ router.get("/thefirstshead", async (req: Request, res: Response) => {
       res.status(200).json({ data: thefirstsHead });
     } else {
       fetchTheFirsts()
-
       // FILL THEFIRSTSHEAD
       thefirstsHead = theFirstsRss
       thefirstsHead.items = []
       if (theFirstsRss) res.status(200).json({ data: thefirstsHead });
     }
   } catch (error) {
+    res.status(400).send({ data: error });
   }
 });
 
 router.get("/thefirsts", async (req: Request, res: Response) => {
   try {
-    if (thefirsts) {
+    if (theFirstsRss) {
       // SENT FORM CACHE
       console.log([`/THEFIRSTS - SENT FROM CACHE`]);
-      res.status(200).json({ data: thefirsts });
+      res.status(200).json({ data: theFirstsRss });
     } else {
-      var rss: RssTypes = await parse(
-        "https://feeds.buzzsprout.com/1194665.rss"
-      );
-      // const sendRss = {
-      //   title: rss.title,
-      //   description: rss.description,
-      //   link: rss.link,
-      //   image: rss.image,
-      //   items: rss.items.slice(0, 8),
-      // };
-
       // FILL CACHE
-      thefirsts = rss;
-      if (rss) res.status(200).json({ data: rss });
+      fetchTheFirsts()
+      if (theFirstsRss) res.status(200).json({ data: theFirstsRss });
     }
   } catch (err) {
-    res.status(400).json({ data: "error" });
-    res.end();
+    res.status(400).send({ data: err });
   }
 });
 
