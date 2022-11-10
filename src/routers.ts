@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import express from "express";
 import { RssTypes, RssHead } from "./types/routerTypes";
-const { parse } = require("rss-to-json");
+import { parse } from "rss-to-json";
+
+
 const router = express.Router();
 
 // FETCH 
@@ -9,6 +11,7 @@ let theFirstsRss: RssTypes;
 let onePathRss: RssTypes;
 // HEAD
 let thefirstsHead: RssHead;
+let onePathHead: RssTypes;
 
 async function fetchTheFirsts() {
   const res: RssTypes = await parse(
@@ -24,6 +27,8 @@ async function fetchOnePath() {
     "https://feeds.buzzsprout.com/2042303.rss"
   );
   onePathRss = res
+  onePathHead = { ...res }
+  onePathHead.items = []
 } fetchOnePath()
 
 router.get("/thefirstshead", async (req: Request, res: Response) => {
