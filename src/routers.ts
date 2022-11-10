@@ -42,6 +42,21 @@ router.get("/thefirstshead", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/onepathhead", async (req: Request, res: Response) => {
+  try {
+    if (onePathRss) {
+      // SENT FORM CACHED
+      console.log([`/ONEPATHHEAD - SENT FROM CACHE`]);
+      res.status(200).json({ data: onePathHead });
+    } else {
+      fetchOnePath();
+      if (onePathHead) res.status(200).json({ data: onePathHead });
+    }
+  } catch (error) {
+    res.status(400).send({ data: error });
+  }
+});
+
 router.get("/thefirsts", async (req: Request, res: Response) => {
   try {
     if (theFirstsRss) {
