@@ -30,7 +30,18 @@ export interface ThefirstsHead {
   description: string;
   link: string;
   image: string;
+  items: any
 }
+
+// FETCH 
+let theFirstsRss: RssTypes;
+
+async function fetchTheFirsts() {
+  var theFirstsRssFetch: RssTypes = await parse(
+    "https://feeds.buzzsprout.com/1194665.rss"
+  );
+  theFirstsRss = theFirstsRssFetch
+} fetchTheFirsts()
 
 // CACHED
 let thefirsts: RssTypes;
@@ -39,17 +50,31 @@ let onepath: RssTypes;
 // HEAD
 let thefirstsHead: ThefirstsHead;
 
-router.get("thefirstshead", async (req: Request, res: Response) => {
+router.get("/thefirstshead", async (req: Request, res: Response) => {
+  console.log(thefirsts);
   try {
     if (thefirsts) {
-      // SENT FORM CACHE
-      console.log([`/THEFIRSTS - SENT FROM CACHE`]);
-      res.status(200).json({ data: thefirsts });
+      thefirstsHead = thefirsts
+      thefirstsHead.items = []
+
+      // SENT FORM CACHED
+      console.log([`/THEFIRSTSHEAD - SENT FROM CACHE`]);
+      res.status(200).json({ data: thefirstsHead });
+    } else {
+      var rss: RssTypes = await parse(
+        "https://feeds.buzzsprout.com/1194665.rss"
+      );
+      // FILL CACHE
+      thefirsts = rss;
+
+      // FILL THEFIRSTSHEAD
+      thefirstsHead = thefirsts
+      thefirstsHead.items = []
+      if (rss) res.status(200).json({ data: thefirstsHead });
     }
   } catch (error) {
-
   }
-})
+});
 
 router.get("/thefirsts", async (req: Request, res: Response) => {
   try {
