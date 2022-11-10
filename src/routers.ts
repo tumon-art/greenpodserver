@@ -35,13 +35,22 @@ export interface ThefirstsHead {
 
 // FETCH 
 let theFirstsRss: RssTypes;
+let onePathRss: RssTypes;
 
 async function fetchTheFirsts() {
-  var theFirstsRssFetch: RssTypes = await parse(
+  const res: RssTypes = await parse(
     "https://feeds.buzzsprout.com/1194665.rss"
   );
-  theFirstsRss = theFirstsRssFetch
+  theFirstsRss = res
 } fetchTheFirsts()
+
+async function fetchOnePath() {
+  const res: RssTypes = await parse(
+    "https://feeds.buzzsprout.com/2042303.rss"
+  );
+  onePathRss = res
+
+}
 
 // CACHED
 let thefirsts: RssTypes;
@@ -102,8 +111,7 @@ router.get("/onepath", async (req: Request, res: Response) => {
       if (rss) res.status(200).json({ data: rss });
     }
   } catch (err) {
-    res.status(400).json({ data: "error" });
-    res.end();
+    res.status(400).send({ data: err });
   }
 });
 
