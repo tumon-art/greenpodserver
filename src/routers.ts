@@ -1,12 +1,10 @@
 import { Request, Response } from "express";
 import express from "express";
-import { RssTypes, RssHead } from "./types/routerTypes";
+import { RssHead, RssTypes } from "./types/routerTypes";
 import { parse } from "rss-to-json";
-
-
 const router = express.Router();
 
-// FETCH 
+// FETCH
 let theFirstsRss: RssTypes;
 let onePathRss: RssTypes;
 // HEAD
@@ -14,22 +12,20 @@ let thefirstsHead: RssHead;
 let onePathHead: RssTypes;
 
 async function fetchTheFirsts() {
-  const res: RssTypes = await parse(
-    "https://feeds.buzzsprout.com/1194665.rss"
-  );
-  theFirstsRss = res
-  thefirstsHead = { ...res }
-  thefirstsHead.items = []
-} fetchTheFirsts()
+  const res: RssTypes = await parse("https://feeds.buzzsprout.com/1194665.rss");
+  theFirstsRss = res;
+  thefirstsHead = { ...res };
+  thefirstsHead.items = [];
+}
+fetchTheFirsts();
 
 async function fetchOnePath() {
-  const res: RssTypes = await parse(
-    "https://feeds.buzzsprout.com/2042303.rss"
-  );
-  onePathRss = res
-  onePathHead = { ...res }
-  onePathHead.items = []
-} fetchOnePath()
+  const res: RssTypes = await parse("https://feeds.buzzsprout.com/2042303.rss");
+  onePathRss = res;
+  onePathHead = { ...res };
+  onePathHead.items = [];
+}
+fetchOnePath();
 
 router.get("/thefirstshead", async (req: Request, res: Response) => {
   try {
@@ -38,7 +34,7 @@ router.get("/thefirstshead", async (req: Request, res: Response) => {
       console.log([`/THEFIRSTSHEAD - SENT FROM CACHE`]);
       res.status(200).json({ data: thefirstsHead });
     } else {
-      fetchTheFirsts()
+      fetchTheFirsts();
       if (theFirstsRss) res.status(200).json({ data: thefirstsHead });
     }
   } catch (error) {
@@ -54,7 +50,7 @@ router.get("/thefirsts", async (req: Request, res: Response) => {
       res.status(200).json({ data: theFirstsRss });
     } else {
       // FILL CACHE
-      fetchTheFirsts()
+      fetchTheFirsts();
       if (theFirstsRss) res.status(200).json({ data: theFirstsRss });
     }
   } catch (err) {
@@ -70,7 +66,7 @@ router.get("/onepath", async (req: Request, res: Response) => {
       res.status(200).json({ data: onePathRss });
     } else {
       // FILL CACHE
-      fetchOnePath()
+      fetchOnePath();
       if (onePathRss) res.status(200).json({ data: onePathRss });
     }
   } catch (err) {

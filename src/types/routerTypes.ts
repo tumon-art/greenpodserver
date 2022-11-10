@@ -20,10 +20,10 @@ export interface RssTypes {
   items: ItemsProps[];
 }
 
-export interface ThefirstsHead {
+export interface RssHead {
   title: string;
   description: string;
   link: string;
   image: string;
-  items: any
+  items: any;
 }
