@@ -1,37 +1,8 @@
 import { Request, Response } from "express";
 import express from "express";
+import { RssTypes, ThefirstsHead } from "./types/routerTypes";
 const { parse } = require("rss-to-json");
 const router = express.Router();
-
-export interface ItemsProps {
-  title: string;
-  description: string;
-  published: string;
-  created: string;
-  category: [];
-  content: string;
-  enclosures: [{ lenght: string; type: string; url: string }];
-  itunes_author: string;
-  itunes_duration: number;
-  itunes_episode: number;
-  itunes_episodeType: "full";
-}
-export interface RssTypes {
-  title: string;
-  description: string;
-  link: string;
-  image: string;
-  category: [];
-  items: ItemsProps[];
-}
-
-export interface ThefirstsHead {
-  title: string;
-  description: string;
-  link: string;
-  image: string;
-  items: any
-}
 
 // FETCH 
 let theFirstsRss: RssTypes;
