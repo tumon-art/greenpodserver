@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import express from "express";
 import { RssHead, RssTypes } from "./types/routerTypes";
 import { parse } from "rss-to-json";
@@ -27,7 +27,7 @@ async function fetchOnePath() {
 }
 fetchOnePath();
 
-router.get("/thefirstshead", async (req: Request, res: Response) => {
+router.get("/thefirstshead", async (_: unknown, res: Response) => {
   try {
     if (theFirstsRss) {
       // SENT FORM CACHED
@@ -42,7 +42,7 @@ router.get("/thefirstshead", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/onepathhead", async (req: Request, res: Response) => {
+router.get("/onepathhead", async (_: unknown, res: Response) => {
   try {
     if (onePathRss) {
       // SENT FORM CACHED
@@ -57,7 +57,7 @@ router.get("/onepathhead", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/thefirsts", async (req: Request, res: Response) => {
+router.get("/thefirsts", async (_: unknown, res: Response) => {
   try {
     if (theFirstsRss) {
       // SENT FORM CACHE
@@ -73,7 +73,7 @@ router.get("/thefirsts", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/onepath", async (req: Request, res: Response) => {
+router.get("/onepath", async (_: unknown, res: Response) => {
   try {
     if (onePathRss) {
       // SENT FORM CACHE
